@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zaggoware.BugTracker.Web", "Zaggoware.BugTracker\Zaggoware.BugTracker.Web.csproj", "{E46347C0-ADB7-479A-9EC7-58CED17FEFC7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zaggoware.BugTracker.Data", "Zaggoware.BugTracker.Data\Zaggoware.BugTracker.Data.csproj", "{3D457711-7B54-4D03-860C-24C3CBD995DA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zaggoware.BugTracker.Common", "Zaggoware.BugTracker.Common\Zaggoware.BugTracker.Common.csproj", "{82DA8C31-79F4-4EE8-8F27-B28CFFA82E85}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zaggoware.BugTracker.Services", "Zaggoware.BugTracker.Services\Zaggoware.BugTracker.Services.csproj", "{E76E2FEF-F561-4B24-834A-FB3861780435}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E46347C0-ADB7-479A-9EC7-58CED17FEFC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E46347C0-ADB7-479A-9EC7-58CED17FEFC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E46347C0-ADB7-479A-9EC7-58CED17FEFC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E46347C0-ADB7-479A-9EC7-58CED17FEFC7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D457711-7B54-4D03-860C-24C3CBD995DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D457711-7B54-4D03-860C-24C3CBD995DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D457711-7B54-4D03-860C-24C3CBD995DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D457711-7B54-4D03-860C-24C3CBD995DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{82DA8C31-79F4-4EE8-8F27-B28CFFA82E85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82DA8C31-79F4-4EE8-8F27-B28CFFA82E85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82DA8C31-79F4-4EE8-8F27-B28CFFA82E85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82DA8C31-79F4-4EE8-8F27-B28CFFA82E85}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E76E2FEF-F561-4B24-834A-FB3861780435}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E76E2FEF-F561-4B24-834A-FB3861780435}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E76E2FEF-F561-4B24-834A-FB3861780435}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E76E2FEF-F561-4B24-834A-FB3861780435}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
