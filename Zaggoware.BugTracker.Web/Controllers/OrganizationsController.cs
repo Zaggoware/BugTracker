@@ -6,12 +6,12 @@ using System.Web.Mvc;
 
 namespace Zaggoware.BugTracker.Web.Controllers
 {
-    public class OrganizationsController : Controller
+    public class OrganizationsController : BaseController
     {
         // GET: Organization
         public ActionResult Index()
         {
-            return View();
+            return this.View();
         }
     }
 }

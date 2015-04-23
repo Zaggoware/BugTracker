@@ -113,6 +113,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\BugsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OrganizationsController.cs" />
@@ -120,6 +121,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\Notification.cs" />
+    <Compile Include="Models\NotifyType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -127,9 +131,9 @@
     <Content Include="favicon.ico" />
     <Content Include="content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <None Include="content\site.less" />
     <Content Include="scripts\bootstrap.js" />
     <Content Include="scripts\bootstrap.min.js" />
+    <Content Include="content\site.css" />
     <None Include="scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="scripts\jquery-1.10.2.js" />
     <Content Include="scripts\jquery-1.10.2.min.js" />
@@ -157,11 +161,10 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\Account\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
-    <Folder Include="Views\Account\" />
     <Folder Include="Views\Bugs\" />
     <Folder Include="Views\Organizations\" />
     <Folder Include="Views\Projects\" />
@@ -172,6 +175,20 @@
     <Content Include="content\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Zaggoware.BugTracker.Common\Zaggoware.BugTracker.Common.csproj">
+      <Project>{82DA8C31-79F4-4EE8-8F27-B28CFFA82E85}</Project>
+      <Name>Zaggoware.BugTracker.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Zaggoware.BugTracker.Locale\Zaggoware.BugTracker.Locale.csproj">
+      <Project>{589a5786-de63-43de-9a87-11c68c18e376}</Project>
+      <Name>Zaggoware.BugTracker.Locale</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Zaggoware.BugTracker.Services\Zaggoware.BugTracker.Services.csproj">
+      <Project>{e76e2fef-f561-4b24-834a-fb3861780435}</Project>
+      <Name>Zaggoware.BugTracker.Services</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

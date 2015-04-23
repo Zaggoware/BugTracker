@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace Zaggoware.BugTracker.Web.Controllers
 {
-    public class ProjectsController : Controller
+    public class ProjectsController : BaseController
     {
         // GET: Project
         public ActionResult Index()
