@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Mvc;
 
-namespace Zaggoware.BugTracker
+namespace Zaggoware.BugTracker.Web
 {
 	public class FilterConfig
 	{

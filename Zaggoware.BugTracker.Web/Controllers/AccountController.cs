@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Zaggoware.BugTracker.Controllers
+namespace Zaggoware.BugTracker.Web.Controllers
 {
     public class AccountController : Controller
     {
