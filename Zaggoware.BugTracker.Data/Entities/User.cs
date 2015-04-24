@@ -8,7 +8,9 @@ namespace Zaggoware.BugTracker.Data.Entities
 {
 	using System.Collections.ObjectModel;
 
-	public class User : IAssignable
+	using Microsoft.AspNet.Identity.EntityFramework;
+
+    public class User : IdentityUser
 	{
 		public User()
 		{
@@ -16,14 +18,6 @@ namespace Zaggoware.BugTracker.Data.Entities
 			this.CreationDate = DateTime.Now;
 			this.ModificationDate = DateTime.Now;
 		}
-
-		public int Id { get; set; }
-
-		public string UserName { get; set; }
-
-		public string HashedPassword { get; set; }
-
-		public string EmailAddress { get; set; }
 
 		public string FirstName { get; set; }
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Zaggoware.BugTracker.Data.Entities
 {
-	public class UserGroup : IAssignable
+	public class UserGroup
 	{
 		public int Id { get; set; }
 

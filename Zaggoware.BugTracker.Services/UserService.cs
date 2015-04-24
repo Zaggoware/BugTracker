@@ -6,27 +6,30 @@ using System.Threading.Tasks;
 
 namespace Zaggoware.BugTracker.Services
 {
-	using Zaggoware.BugTracker.Common;
+    using Microsoft.AspNet.Identity;
+
+    using Zaggoware.BugTracker.Common;
 	using Zaggoware.BugTracker.Data;
 
-	public class UserService : IUserService
+	public class UserService : UserManager<Data.Entities.User>, IUserService
 	{
 		private readonly IDbContext context;
 
-		public UserService(IDbContext context)
+		public UserService(
+            IUserStore<Data.Entities.User> userStore,
+            IDbContext context)
+            : base(userStore)
 		{
 			this.context = context;
 		}
 
 	    public User CreateUser(string userName, string password, string emailAddress, string firstName = null, string lastName = null)
 	    {
-		    var user = new Data.Entities.User
-			               {
-				               UserName = userName,
-				               EmailAddress = emailAddress,
-				               FirstName = firstName,
-				               LastName = lastName
-			               };
+	        var user = this.context.Users.Create();
+	        user.UserName = userName;
+	        user.Email = emailAddress;
+	        user.FirstName = firstName;
+	        user.LastName = lastName;
 
 		    this.context.Users.Add(user);
 		    this.context.SaveChanges();
@@ -46,7 +49,7 @@ namespace Zaggoware.BugTracker.Services
 
 		public User GetUserByEmailAddress(string emailAddress)
 		{
-			return this.GetMappedUser(u => u.EmailAddress.Equals(emailAddress, StringComparison.InvariantCultureIgnoreCase));
+			return this.GetMappedUser(u => u.Email.Equals(emailAddress, StringComparison.InvariantCultureIgnoreCase));
 		}
 
 		public string HashPassword(string password)
@@ -65,7 +68,7 @@ namespace Zaggoware.BugTracker.Services
 			{
 				password = this.HashPassword(password);
 
-				return user.HashedPassword == password;
+				return user.PasswordHash == password;
 			}
 
 			// Prevent timing attacks

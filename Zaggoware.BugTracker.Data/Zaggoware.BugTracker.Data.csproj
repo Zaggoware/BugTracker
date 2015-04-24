@@ -56,7 +56,6 @@
   <ItemGroup>
     <Compile Include="ChangesSavedEvent.cs" />
     <Compile Include="Entities\Bug.cs" />
-    <Compile Include="Entities\IAssignable.cs" />
     <Compile Include="Entities\Organization.cs" />
     <Compile Include="Entities\Privilege.cs" />
     <Compile Include="Entities\Project.cs" />

@@ -16,7 +16,7 @@ namespace Zaggoware.BugTracker.Services
 				       {
 						   Id = user.Id,
 						   UserName = user.LastName,
-						   EmailAddress = user.EmailAddress,
+						   EmailAddress = user.Email,
 						   FirstName = user.FirstName,
 						   LastName = user.LastName
 				       };

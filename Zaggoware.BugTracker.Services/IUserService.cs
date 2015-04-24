@@ -8,7 +8,7 @@ namespace Zaggoware.BugTracker.Services
 {
 	using Zaggoware.BugTracker.Common;
 
-	public interface IUserService
+	public interface IUserService : IDisposable
 	{
 		User CreateUser(
 			string userName,
