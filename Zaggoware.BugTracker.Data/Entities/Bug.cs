@@ -12,7 +12,7 @@ namespace Zaggoware.BugTracker.Data.Entities
 
 		public string Title { get; set; }
 
-		public virtual User Assignee { get; set; }
+		public virtual IAssignable Assignee { get; set; }
 
 		public virtual User Reporter { get; set; }
 

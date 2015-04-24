@@ -6,8 +6,15 @@ using System.Web.Mvc;
 
 namespace Zaggoware.BugTracker.Web.Controllers
 {
-    public class OrganizationsController : BaseController
+	using Zaggoware.BugTracker.Services;
+
+	public class OrganizationsController : BaseController
     {
+		public OrganizationsController(Lazy<IUserService> userService)
+			: base(userService)
+	    {
+	    }
+
         // GET: Organization
         public ActionResult Index()
         {

@@ -6,8 +6,17 @@ using System.Threading.Tasks;
 
 namespace Zaggoware.BugTracker.Data.Entities
 {
-	public class User
+	using System.Collections.ObjectModel;
+
+	public class User : IAssignable
 	{
+		public User()
+		{
+			this.UserGroups = new Collection<UserGroup>();
+			this.CreationDate = DateTime.Now;
+			this.ModificationDate = DateTime.Now;
+		}
+
 		public int Id { get; set; }
 
 		public string UserName { get; set; }

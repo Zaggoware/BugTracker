@@ -5,6 +5,8 @@
 
 <h2>Login</h2>
 
+@Html.Partial("_Notifications")
+
 @if (!ViewData.ModelState.IsValid)
 {
     @Html.ValidationSummary()
@@ -12,6 +14,8 @@
 
 @using (Html.BeginForm())
 {
+    @Html.AntiForgeryToken()
+    
     <div class="form-group">
         @Html.LabelFor(m => m.UserName)
         @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
@@ -19,5 +23,14 @@
     <div class="form-group">
         @Html.LabelFor(m => m.Password)
         @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <div class="checkbox">
+            @Html.CheckBoxFor(m => m.RememberUserName)
+            @Html.LabelFor(m => m.RememberUserName)
+        </div>
+    </div>
+    <div class="form-group">
+        <input type="submit" class="btn btn-primary" value="Login"/>
     </div>
 }

@@ -8,8 +8,17 @@ using Zaggoware.BugTracker.Locale;
 
 namespace Zaggoware.BugTracker.Web.Controllers
 {
-    public class AccountController : BaseController
+    using System.Web.Security;
+
+    using Zaggoware.BugTracker.Services;
+
+	public class AccountController : BaseController
     {
+	    public AccountController(Lazy<IUserService> userService)
+			: base(userService)
+	    {
+	    }
+
         // GET: Account
         public ActionResult Index()
         {
@@ -18,7 +27,7 @@ namespace Zaggoware.BugTracker.Web.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public ActionResult Login()
+        public ActionResult Login(string redirectUrl)
         {
             var model = new LoginModel();
             var cookie = Request.Cookies.Get("RememberUserName");
@@ -36,7 +45,8 @@ namespace Zaggoware.BugTracker.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(LoginModel model)
+        [AllowAnonymous]
+        public ActionResult Login(LoginModel model, string redirectUrl)
         {
             if (!this.ModelState.IsValid)
             {
@@ -45,21 +55,27 @@ namespace Zaggoware.BugTracker.Web.Controllers
                 return this.View(model);
             }
 
-            if (model.RememberUserName)
+            var cookie = this.Response.Cookies.Get("RememberUserName");
+            if (cookie == null)
             {
-                this.Request.Cookies.Add(new HttpCookie("RememberUserName", "True"));
-            }
-            else
-            {
-                this.Request.Cookies.Add(new HttpCookie("RememberUserName", "False"));
-            }
+                cookie = new HttpCookie("RememberUserName", model.RememberUserName.ToString());
 
-            // TODO: Validate Login
-            if (false)
+                this.Request.Cookies.Add(cookie);
+            }
+            cookie.Expires = DateTime.Now.AddYears(1);
+
+            if (!this.UserService.Value.ValidatePassword(model.UserName, model.Password))
             {
                 this.NotifyUser(NotifyType.Error, Notifications.LoginErrorMessage);
 
                 return this.View(model);
+            }
+
+            FormsAuthentication.SetAuthCookie(model.UserName, true);
+
+            if (Url.IsLocalUrl(redirectUrl))
+            {
+                return this.Redirect(redirectUrl);
             }
 
             return this.RedirectToAction("Index", "Home");

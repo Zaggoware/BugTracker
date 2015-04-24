@@ -9,10 +9,19 @@ using Zaggoware.BugTracker.Web.Models;
 
 namespace Zaggoware.BugTracker.Web.Controllers
 {
-    [Authorize]
+	using Zaggoware.BugTracker.Services;
+
+	[Authorize]
     public abstract class BaseController : Controller
     {
-        public User CurrentUser { get; set; }
+        protected User CurrentUser { get; private set; }
+
+		protected Lazy<IUserService> UserService { get; private set; }
+
+	    protected BaseController(Lazy<IUserService> userService)
+	    {
+		    this.UserService = userService;
+	    }
 
         protected override void Initialize(RequestContext requestContext)
         {
@@ -21,7 +30,7 @@ namespace Zaggoware.BugTracker.Web.Controllers
 
         protected void NotifyUser(NotifyType type, string message)
         {
-            var notifications = this.TempData[Notification.IndexKey] as List<Notification>;
+            var notifications = this.TempData.Peek(Notification.IndexKey) as List<Notification>;
 
             if (notifications == null)
             {

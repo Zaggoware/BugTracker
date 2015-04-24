@@ -1,0 +1,32 @@
+﻿@{
+    var notifications = TempData[Notification.IndexKey] as IEnumerable<Notification>;
+}
+
+@if (notifications != null)
+{
+    foreach (var notification in notifications)
+    {
+        string alertType;
+
+        switch (notification.Type)
+        {
+            case NotifyType.Success:
+                alertType = "success";
+                break;
+            case NotifyType.Warning:
+                alertType = "warning";
+                break;
+            case NotifyType.Error:
+                alertType = "danger";
+                break;
+            default:
+                alertType = "info";
+                break;
+        }
+        
+        <div class="alert alert-dismissable alert-@alertType">
+            <p>@notification.Message</p>
+        </div>
+    }
+}
+
