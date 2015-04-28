@@ -7,17 +7,20 @@ using System.Threading.Tasks;
 namespace Zaggoware.BugTracker.Services
 {
 	using Zaggoware.BugTracker.Common;
+	using Zaggoware.BugTracker.Common.Paging;
 
-	public interface IUserService : IDisposable
+    public interface IUserService : IDisposable
 	{
-		User CreateUser(
-			string userName,
-			string password,
-			string emailAddress,
-			string firstName = null,
-			string lastName = null);
+	    User CreateUser(
+	        string userName,
+	        string password,
+	        string emailAddress,
+	        string firstName = null,
+	        string lastName = null);
 
-		User GetUserById(int id);
+        IPagedList<User> GetUsers(int page, int itemsPerPage = PagedList.DefaultItemsPerPage);
+
+		User GetUserById(string id);
 
 		User GetUserByUserName(string userName);
 

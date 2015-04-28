@@ -9,9 +9,10 @@ namespace Zaggoware.BugTracker.Services
     using Microsoft.AspNet.Identity;
 
     using Zaggoware.BugTracker.Common;
+    using Zaggoware.BugTracker.Common.Paging;
 	using Zaggoware.BugTracker.Data;
 
-	public class UserService : UserManager<Data.Entities.User>, IUserService
+    public class UserService : UserManager<Data.Entities.User>, IUserService
 	{
 		private readonly IDbContext context;
 
@@ -23,33 +24,46 @@ namespace Zaggoware.BugTracker.Services
 			this.context = context;
 		}
 
-	    public User CreateUser(string userName, string password, string emailAddress, string firstName = null, string lastName = null)
-	    {
+	    public User CreateUser(
+	        string userName,
+	        string password,
+	        string emailAddress,
+	        string firstName = null,
+	        string lastName = null)
+        {
 	        var user = this.context.Users.Create();
 	        user.UserName = userName;
 	        user.Email = emailAddress;
 	        user.FirstName = firstName;
 	        user.LastName = lastName;
 
-		    this.context.Users.Add(user);
-		    this.context.SaveChanges();
+	        this.Create(user, password);
 
-		    return user.Map();
-	    }
+	        return user.Map();
+        }
 
-		public User GetUserById(int id)
+        public IPagedList<User> GetUsers(int page, int itemsPerPage = PagedList.DefaultItemsPerPage)
+        {
+            return this.context.Users.ToPagedList(page, itemsPerPage).Map();
+        }
+
+		public User GetUserById(string id)
 		{
-			return this.GetMappedUser(u => u.Id == id);
+		    return this.context.Users.SingleOrDefault(u => u.Id == id).Map();
 		}
 
 		public User GetUserByUserName(string userName)
 		{
-			return this.GetMappedUser(u => u.UserName.Equals(userName, StringComparison.InvariantCultureIgnoreCase));
+		    return
+		        this.context.Users.SingleOrDefault(
+		            u => u.UserName.Equals(userName, StringComparison.InvariantCultureIgnoreCase)).Map();
 		}
 
 		public User GetUserByEmailAddress(string emailAddress)
 		{
-			return this.GetMappedUser(u => u.Email.Equals(emailAddress, StringComparison.InvariantCultureIgnoreCase));
+		    return
+		        this.context.Users.SingleOrDefault(
+		            u => u.Email.Equals(emailAddress, StringComparison.InvariantCultureIgnoreCase)).Map();
 		}
 
 		public string HashPassword(string password)
@@ -75,18 +89,6 @@ namespace Zaggoware.BugTracker.Services
 			this.HashPassword("__DUMMYPASSWORD__");
 
 			return false;
-		}
-
-		private User GetMappedUser(Func<Data.Entities.User, bool> predicate)
-		{
-			var user = this.context.Users.SingleOrDefault(predicate);
-
-			if (user == null)
-			{
-				return null;
-			}
-
-			return user.Map();
 		}
 	}
 }

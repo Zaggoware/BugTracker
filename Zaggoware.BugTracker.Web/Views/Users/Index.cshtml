@@ -1,0 +1,17 @@
+﻿@model IPagedList<User>
+@{
+    ViewBag.Title = Titles.Users;
+}
+
+<h2>@Titles.Users</h2>
+
+<p>Number of pages: @Model.NumberOfPages</p>
+<p>Items per page: @Model.ItemsPerPage</p>
+<p>Page: @Model.Page</p>
+
+<ul>
+    @foreach (var user in Model)
+    {
+        <li>@user.UserName (@user.FullName)</li>
+    }
+</ul>

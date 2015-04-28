@@ -10,7 +10,7 @@ namespace Zaggoware.BugTracker.Web.Controllers
 
 	public class HomeController : BaseController
 	{
-		public HomeController(Lazy<IUserService> userService)
+		public HomeController(IUserService userService)
 			: base(userService)
 		{
 		}

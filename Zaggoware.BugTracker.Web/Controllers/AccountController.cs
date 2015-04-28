@@ -14,7 +14,7 @@ namespace Zaggoware.BugTracker.Web.Controllers
 
 	public class AccountController : BaseController
     {
-	    public AccountController(Lazy<IUserService> userService)
+	    public AccountController(IUserService userService)
 			: base(userService)
 	    {
 	    }
@@ -64,9 +64,9 @@ namespace Zaggoware.BugTracker.Web.Controllers
             }
             cookie.Expires = DateTime.Now.AddYears(1);
 
-            if (!this.UserService.Value.ValidatePassword(model.UserName, model.Password))
+            if (!this.UserService.ValidatePassword(model.UserName, model.Password))
             {
-                this.NotifyUser(NotifyType.Error, Notifications.LoginErrorMessage);
+                this.NotifyUser(NotifyType.Error, Notifications.LoginError);
 
                 return this.View(model);
             }
@@ -99,7 +99,7 @@ namespace Zaggoware.BugTracker.Web.Controllers
         public ActionResult LogoutPost()
         {
             // TODO: Logout
-            this.NotifyUser(NotifyType.Success, Notifications.LogoutSuccessMessage);
+            this.NotifyUser(NotifyType.Success, Notifications.LogoutSuccess);
 
             return this.RedirectToAction("Login");
         }

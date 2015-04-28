@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 namespace Zaggoware.BugTracker.Data.Entities
 {
 	using System.Collections.ObjectModel;
+	using System.ComponentModel;
 
 	using Microsoft.AspNet.Identity.EntityFramework;
 
@@ -28,5 +29,8 @@ namespace Zaggoware.BugTracker.Data.Entities
 		public DateTime CreationDate { get; set; }
 
 		public DateTime ModificationDate { get; set; }
+
+        [DefaultValue(true)]
+        public bool IsActive { get; set; }
 	}
 }

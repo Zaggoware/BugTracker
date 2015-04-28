@@ -10,7 +10,7 @@ namespace Zaggoware.BugTracker.Web.Controllers
 
 	public class BugsController : BaseController
     {
-		public BugsController(Lazy<IUserService> userService)
+		public BugsController(IUserService userService)
 			: base(userService)
 	    {
 	    }

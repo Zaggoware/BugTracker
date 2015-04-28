@@ -16,9 +16,9 @@ namespace Zaggoware.BugTracker.Web.Controllers
     {
         protected User CurrentUser { get; private set; }
 
-		protected Lazy<IUserService> UserService { get; private set; }
+		protected IUserService UserService { get; private set; }
 
-	    protected BaseController(Lazy<IUserService> userService)
+	    protected BaseController(IUserService userService)
 	    {
 		    this.UserService = userService;
 	    }

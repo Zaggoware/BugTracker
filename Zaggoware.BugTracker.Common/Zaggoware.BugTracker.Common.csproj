@@ -40,8 +40,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EnumHelper.cs" />
+    <Compile Include="Helpers\EnumHelper.cs" />
     <Compile Include="Organization.cs" />
+    <Compile Include="Paging\IPagedList.cs" />
+    <Compile Include="Paging\PagedList.cs" />
+    <Compile Include="Paging\PagingHelper.cs" />
     <Compile Include="User.cs" />
     <Compile Include="Privileges.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
