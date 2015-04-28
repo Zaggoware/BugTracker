@@ -2,4 +2,6 @@
 bin/
 obj/
 packages/
-.nuget/
+
+#Allow NuGet.exe
+!NuGet.exe
