@@ -26,8 +26,6 @@ namespace Zaggoware.BugTracker.Services
 
 		User GetUserByEmailAddress(string emailAddress);
 
-		string HashPassword(string password);
-
 		bool ValidatePassword(string userName, string password);
 	}
 }

@@ -27,7 +27,7 @@ namespace Zaggoware.BugTracker.Web.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public ActionResult Login(string redirectUrl)
+        public ActionResult Login(string returnUrl)
         {
             var model = new LoginModel();
             var cookie = Request.Cookies.Get("RememberUserName");
@@ -46,7 +46,7 @@ namespace Zaggoware.BugTracker.Web.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AllowAnonymous]
-        public ActionResult Login(LoginModel model, string redirectUrl)
+        public ActionResult Login(LoginModel model, string returnUrl)
         {
             if (!this.ModelState.IsValid)
             {
@@ -73,9 +73,9 @@ namespace Zaggoware.BugTracker.Web.Controllers
 
             FormsAuthentication.SetAuthCookie(model.UserName, true);
 
-            if (Url.IsLocalUrl(redirectUrl))
+            if (Url.IsLocalUrl(returnUrl))
             {
-                return this.Redirect(redirectUrl);
+                return this.Redirect(returnUrl);
             }
 
             return this.RedirectToAction("Index", "Home");

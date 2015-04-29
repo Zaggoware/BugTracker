@@ -14,9 +14,17 @@ namespace Zaggoware.BugTracker.Services
 
     public class UserService : UserManager<Data.Entities.User>, IUserService
 	{
+        public override bool SupportsUserPassword
+        {
+            get
+            {
+                return true;
+            }
+        }
+
 		private readonly IDbContext context;
 
-		public UserService(
+        public UserService(
             IUserStore<Data.Entities.User> userStore,
             IDbContext context)
             : base(userStore)
@@ -38,6 +46,9 @@ namespace Zaggoware.BugTracker.Services
 	        user.LastName = lastName;
 
 	        this.Create(user, password);
+
+            context.Users.Add(user);
+            context.SaveChanges();
 
 	        return user.Map();
         }
@@ -66,27 +77,17 @@ namespace Zaggoware.BugTracker.Services
 		            u => u.Email.Equals(emailAddress, StringComparison.InvariantCultureIgnoreCase)).Map();
 		}
 
-		public string HashPassword(string password)
-		{
-			// TODO: Use Crypto
-
-			return password;
-		}
-
 		public bool ValidatePassword(string userName, string password)
 		{
 			var user =
 				this.context.Users.SingleOrDefault(u => u.UserName.Equals(userName, StringComparison.InvariantCultureIgnoreCase));
 
-			if (!string.IsNullOrEmpty(password) && user != null)
-			{
-				password = this.HashPassword(password);
+		    if (this.SupportsUserPassword)
+		    {
+		        var store = this.Store as IUserPasswordStore<Data.Entities.User, string>;
 
-				return user.PasswordHash == password;
-			}
-
-			// Prevent timing attacks
-			this.HashPassword("__DUMMYPASSWORD__");
+		        return this.VerifyPasswordAsync(store, user, password).Result;
+		    }
 
 			return false;
 		}

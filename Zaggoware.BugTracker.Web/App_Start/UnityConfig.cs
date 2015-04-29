@@ -4,6 +4,8 @@ using Microsoft.Practices.Unity.Configuration;
 
 namespace Zaggoware.BugTracker.Web
 {
+    using Owin;
+
     using Zaggoware.BugTracker.Services;
 
     /// <summary>
@@ -15,9 +17,11 @@ namespace Zaggoware.BugTracker.Web
         private static readonly Lazy<IUnityContainer> Container = new Lazy<IUnityContainer>(() =>
         {
             var container = new UnityContainer();
-            RegisterTypes(container);
+            RegisterTypes(appBuilder, container);
             return container;
         });
+
+        private static IAppBuilder appBuilder;
 
         /// <summary>
         /// Gets the configured Unity container.
@@ -26,18 +30,22 @@ namespace Zaggoware.BugTracker.Web
         {
             return Container.Value;
         }
+
         #endregion
 
         /// <summary>Registers the type mappings with the Unity container.</summary>
         /// <param name="container">The unity container to configure.</param>
         /// <remarks>There is no need to register concrete types such as controllers or API controllers (unless you want to 
         /// change the defaults), as Unity allows resolving a concrete type even if it was not previously registered.</remarks>
-        public static void RegisterTypes(IUnityContainer container)
+        public static void RegisterTypes(IAppBuilder app, IUnityContainer container)
         {
             // NOTE: To load from web.config uncomment the line below. Make sure to add a Microsoft.Practices.Unity.Configuration to the using statements.
             // container.LoadConfiguration();
+        }
 
-            Services.UnityConfig.RegisterTypes(container);
+        public static void RegisterAppBuilder(IAppBuilder app)
+        {
+            appBuilder = app;
         }
     }
 }

@@ -5,6 +5,9 @@ namespace Zaggoware.BugTracker.Data.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
+
     using Zaggoware.BugTracker.Data.Entities;
 
     internal sealed class Configuration : DbMigrationsConfiguration<Data.DbContext>
@@ -28,14 +31,20 @@ namespace Zaggoware.BugTracker.Data.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
-        }
 
-        private void CreateDefaultUsers(Data.DbContext context)
-        {
-            var admin = context.Users.Create();
-            admin.UserName = "Admin";
+            if (
+                context.Users.SingleOrDefault(
+                    u => u.UserName.Equals("Admin", StringComparison.InvariantCultureIgnoreCase)) == null)
+            {
+                var userManager = new UserManager<User>(new UserStore<User>(context));
+                var admin = context.Users.Create();
+                admin.UserName = "Admin";
 
+                userManager.Create(admin, "Admin");
 
+                context.Users.Add(admin);
+                context.SaveChanges();
+            }
         }
     }
 }

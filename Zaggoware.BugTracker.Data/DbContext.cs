@@ -2,13 +2,16 @@
 {
 	using System;
 	using System.Data.Entity;
+	using System.Threading.Tasks;
+
+	using Microsoft.AspNet.Identity.EntityFramework;
 
 	using Zaggoware.BugTracker.Data.Entities;
 
 	/// <summary>
 	/// The db context.
 	/// </summary>
-	public class DbContext : System.Data.Entity.DbContext, IDbContext
+	public class DbContext : IdentityDbContext<User>, IDbContext
 	{
 		#region Public Events
 
@@ -51,16 +54,20 @@
 		/// </summary>
 		public IDbSet<UserGroup> UserGroups { get; set; }
 
-		/// <summary>
-		/// Gets or sets the users.
-		/// </summary>
-		public IDbSet<User> Users { get; set; }
-
 		#endregion
 
-		#region Public Methods and Operators
+        #region Constructors
 
-		/// <summary>
+        public DbContext()
+            : base("DefaultConnection", false)
+        {
+        }
+
+        #endregion
+
+        #region Public Methods and Operators
+
+        /// <summary>
 		/// The save changes.
 		/// </summary>
 		/// <returns>
@@ -73,7 +80,7 @@
 				this.SavingChanges(this, EventArgs.Empty);
 			}
 
-			int numberOfStateEntries = base.SaveChanges();
+			var numberOfStateEntries = base.SaveChanges();
 
 			if (this.ChangesSaved != null)
 			{
@@ -83,6 +90,29 @@
 			return numberOfStateEntries;
 		}
 
-		#endregion
+        /// <summary>
+        /// The save changes async.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+	    public override async Task<int> SaveChangesAsync()
+	    {
+            if (this.SavingChanges != null)
+            {
+                this.SavingChanges(this, EventArgs.Empty);
+            }
+
+	        var numberOfStateEntries = await base.SaveChangesAsync();
+
+            if (this.ChangesSaved != null)
+            {
+                this.ChangesSaved(this, new ChangesSavedEventArgs(numberOfStateEntries));
+            }
+
+	        return numberOfStateEntries;
+	    }
+
+	    #endregion
 	}
 }

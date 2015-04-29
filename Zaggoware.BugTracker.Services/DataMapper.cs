@@ -30,10 +30,12 @@ namespace Zaggoware.BugTracker.Services
 
         public static IPagedList<User> Map(this IPagedList<Data.Entities.User> source)
         {
-            return new PagedList<User>(source.Select(Map), source.Page, source.ItemsPerPage);
+            return source != null
+                       ? new PagedList<User>(source.Select(Map), source.Page, source.ItemsPerPage)
+                       : new PagedList<User>(Enumerable.Empty<User>(), 1, PagedList.DefaultItemsPerPage);
         }
 
-		public static Organization Map(this Data.Entities.Organization organization)
+        public static Organization Map(this Data.Entities.Organization organization)
 		{
             if (organization == null)
             {
