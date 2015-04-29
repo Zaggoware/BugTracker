@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNet.Identity;
 
 namespace Zaggoware.BugTracker.Services
 {
@@ -27,5 +29,7 @@ namespace Zaggoware.BugTracker.Services
 		User GetUserByEmailAddress(string emailAddress);
 
 		bool ValidatePassword(string userName, string password);
+
+        ClaimsIdentity GenerateUserIdentity(string userId);
 	}
 }

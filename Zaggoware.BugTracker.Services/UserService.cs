@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -91,5 +92,17 @@ namespace Zaggoware.BugTracker.Services
 
 			return false;
 		}
+
+        public ClaimsIdentity GenerateUserIdentity(string userId)
+        {
+            var user = this.context.Users.SingleOrDefault(u => u.Id == userId);
+
+            // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
+            var userIdentity = this.CreateIdentity(user, DefaultAuthenticationTypes.ApplicationCookie);
+
+            // TODO: Add custom user claims here
+
+            return userIdentity;
+        }
 	}
 }

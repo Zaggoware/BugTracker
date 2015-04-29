@@ -34,6 +34,7 @@ namespace Zaggoware.BugTracker.Services
             // container.LoadConfiguration();
 
             container.RegisterType<IDbContext, DbContext>(new HierarchicalLifetimeManager());
+            container.RegisterType<System.Data.Entity.DbContext, DbContext>(new HierarchicalLifetimeManager());
             container.RegisterType<IUserStore<User>, UserStore<User>>();
             container.RegisterInstance(typeof(IDataProtectionProvider), app.GetDataProtectionProvider());
             container.RegisterInstance(typeof(IUserService), CreateUserService(container));

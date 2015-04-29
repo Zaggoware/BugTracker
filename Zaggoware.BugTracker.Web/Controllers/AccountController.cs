@@ -1,17 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using Microsoft.Owin.Security;
 using Zaggoware.BugTracker.Web.Models;
 using Zaggoware.BugTracker.Locale;
+using Zaggoware.BugTracker.Services;
 
 namespace Zaggoware.BugTracker.Web.Controllers
 {
-    using System.Web.Security;
-
-    using Zaggoware.BugTracker.Services;
-
 	public class AccountController : BaseController
     {
 	    public AccountController(IUserService userService)
@@ -71,7 +68,7 @@ namespace Zaggoware.BugTracker.Web.Controllers
                 return this.View(model);
             }
 
-            FormsAuthentication.SetAuthCookie(model.UserName, true);
+            // TODO: owin login
 
             if (Url.IsLocalUrl(returnUrl))
             {
