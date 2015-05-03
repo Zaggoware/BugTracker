@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Microsoft.AspNet.Identity;
 using Zaggoware.BugTracker.Common;
 using Zaggoware.BugTracker.Web.Models;
 
@@ -26,6 +27,15 @@ namespace Zaggoware.BugTracker.Web.Controllers
         protected override void Initialize(RequestContext requestContext)
         {
             base.Initialize(requestContext);
+
+            if (this.Request.IsAuthenticated)
+            {
+                var userId = this.User.Identity.GetUserId();
+
+                this.CurrentUser = this.UserService.GetUserById(userId);
+            }
+
+            this.ViewBag.CurrentUser = this.CurrentUser;
         }
 
         protected void NotifyUser(NotifyType type, string message)

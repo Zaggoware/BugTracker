@@ -31,5 +31,9 @@ namespace Zaggoware.BugTracker.Services
 		bool ValidatePassword(string userName, string password);
 
         ClaimsIdentity GenerateUserIdentity(string userId);
+
+        void UpdateUser(string userId, string email, string firstName, string lastName);
+
+        bool UpdatePassword(string userId, string currentPassword, string newPassword);
 	}
 }

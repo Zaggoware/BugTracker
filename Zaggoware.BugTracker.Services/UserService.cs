@@ -104,5 +104,33 @@ namespace Zaggoware.BugTracker.Services
 
             return userIdentity;
         }
+
+        public void UpdateUser(string userId, string email, string firstName, string lastName)
+        {
+            var user = this.context.Users.SingleOrDefault(u => u.Id == userId);
+
+            if (user == null)
+            {
+                return;
+            }
+
+            user.Email = email;
+            user.FirstName = firstName;
+            user.LastName = lastName;
+
+            this.context.SaveChanges();
+        }
+
+        public bool UpdatePassword(string userId, string currentPassword, string newPassword)
+        {
+            var user = this.context.Users.SingleOrDefault(u => u.Id == userId);
+
+            if (user == null)
+            {
+                return false;
+            }
+
+            return this.ChangePassword(userId, currentPassword, newPassword).Succeeded;
+        }
 	}
 }

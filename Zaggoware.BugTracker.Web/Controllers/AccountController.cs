@@ -6,6 +6,7 @@ using Microsoft.Owin.Security;
 using Zaggoware.BugTracker.Web.Models;
 using Zaggoware.BugTracker.Locale;
 using Zaggoware.BugTracker.Services;
+using Zaggoware.BugTracker.Web.Helpers;
 
 namespace Zaggoware.BugTracker.Web.Controllers
 {
@@ -19,7 +20,56 @@ namespace Zaggoware.BugTracker.Web.Controllers
         // GET: Account
         public ActionResult Index()
         {
-            return RedirectToAction("Login");
+            return this.RedirectToAction("Login");
+        }
+
+        [HttpGet]
+	    public ActionResult Edit()
+	    {
+	        return this.View(new AccountModel(this.CurrentUser));
+	    }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+	    public ActionResult Edit(AccountModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                this.UserService.UpdateUser(
+                    this.CurrentUser.Id,
+                    model.EmailAddress,
+                    model.FirstName,
+                    model.LastName
+                );
+
+                if (!string.IsNullOrEmpty(model.CurrentPassword))
+                {
+                    if (string.IsNullOrEmpty(model.NewPassword))
+                    {
+                        this.ModelState.AddModelError<AccountModel>(m => m.NewPassword, Errors.NewPasswordRequired);
+
+                        return this.View(model);
+                    }
+
+                    if (model.NewPassword != model.NewPasswordConfirm)
+                    {
+                        this.ModelState.AddModelError<AccountModel>(m => m.NewPasswordConfirm, Errors.NewPasswordsNotEqual);
+
+                        return this.View(model);
+                    }
+
+                    if (!this.UserService.UpdatePassword(this.CurrentUser.Id, model.CurrentPassword, model.NewPassword))
+                    {
+                        this.ModelState.AddModelError<AccountModel>(m => m.CurrentPassword, Errors.CurrentPasswordInvalid);
+
+                        return this.View(model);
+                    }
+                }
+
+                return this.RedirectToAction("Edit");
+            }
+
+            return this.View(model);
         }
 
         [HttpGet]

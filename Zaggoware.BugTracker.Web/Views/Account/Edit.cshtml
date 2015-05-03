@@ -1,0 +1,54 @@
+﻿@model AccountModel
+@{
+    ViewBag.Title = Titles.EditAccount;
+}
+
+<h2>@Titles.EditAccount</h2>
+
+@Html.Partial("_Notifications")
+
+@if (!ViewData.ModelState.IsValid)
+{
+    @Html.ValidationSummary()
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        <label>@Labels.UserName</label>
+        <input type="text" value="@ViewBag.CurrentUser.UserName" class="form-control disabled" disabled="disabled" />
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.EmailAddress)
+        @Html.EditorFor(m => m.EmailAddress, new { htmlAttributes = new { @class = "form-control" }})
+    </div>
+    <div class="form-control">
+        @Html.LabelFor(m => m.FirstName)
+        @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+    </div>
+    <div class="form-control">
+        @Html.LabelFor(m => m.LastName)
+        @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
+    </div>
+    
+    <hr/>
+    <p>@Titles.ChangePassword</p>
+    
+    <div class="form-group">
+        @Html.LabelFor(m => m.CurrentPassword)
+        @Html.PasswordFor(m => m.CurrentPassword, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.NewPassword)
+        @Html.PasswordFor(m => m.NewPassword, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.NewPasswordConfirm)
+        @Html.PasswordFor(m => m.NewPasswordConfirm, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <input type="submit" class="btn btn-primary" value="Login" />
+    </div>
+}
