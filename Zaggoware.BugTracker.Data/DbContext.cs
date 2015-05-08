@@ -30,11 +30,16 @@
 		#region Public Properties
 
 		/// <summary>
-		/// Gets or sets the bugs.
+		/// Gets or sets the bug reports.
 		/// </summary>
-		public IDbSet<Bug> Bugs { get; set; }
+		public IDbSet<BugReport> BugReports { get; set; }
 
-		/// <summary>
+        /// <summary>
+        /// Gets or sets the comments.
+        /// </summary>
+	    public IDbSet<Comment> Comments { get; set; }
+
+	    /// <summary>
 		/// Gets or sets the organizations.
 		/// </summary>
 		public IDbSet<Organization> Organizations { get; set; }

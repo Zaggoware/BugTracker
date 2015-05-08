@@ -89,6 +89,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataMapper.cs" />
+    <Compile Include="IOrganizationService.cs" />
     <Compile Include="IUserService.cs" />
     <Compile Include="UnityConfig.cs" />
     <Compile Include="UserService.cs" />

@@ -13,9 +13,14 @@
 		#region Public Properties
 
 		/// <summary>
-		/// Gets or sets the bugs.
+		/// Gets or sets the bug reports.
 		/// </summary>
-		IDbSet<Bug> Bugs { get; set; }
+		IDbSet<BugReport> BugReports { get; set; }
+
+        /// <summary>
+        /// Gets or sets the comments.
+        /// </summary>
+        IDbSet<Comment> Comments { get; set; }
 
 		/// <summary>
 		/// Gets or sets the organizations.

@@ -61,6 +61,15 @@ namespace Zaggoware.BugTracker.Locale {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to About.
+        /// </summary>
+        public static string About {
+            get {
+                return ResourceManager.GetString("About", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to BugTracker.
         /// </summary>
         public static string ApplicationName {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Zaggoware.BugTracker.Data.Entities
 {
-	public class Bug
+	public class BugReport
 	{
 		public int Id { get; set; }
 
