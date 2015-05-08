@@ -10,12 +10,18 @@ using Zaggoware.BugTracker.Web.Helpers;
 
 namespace Zaggoware.BugTracker.Web.Controllers
 {
-	public class AccountController : BaseController
+    using Microsoft.Ajax.Utilities;
+    using Microsoft.AspNet.Identity.Owin;
+
+    public class AccountController : BaseController
     {
-	    public AccountController(IUserService userService)
-			: base(userService)
-	    {
-	    }
+        private readonly ApplicationSignInManager signInManager;
+
+        public AccountController(IUserService userService, ApplicationSignInManager signInManager)
+            : base(userService)
+        {
+            this.signInManager = signInManager;
+        }
 
         // GET: Account
         public ActionResult Index()
@@ -111,21 +117,25 @@ namespace Zaggoware.BugTracker.Web.Controllers
             }
             cookie.Expires = DateTime.Now.AddYears(1);
 
-            if (!this.UserService.ValidatePassword(model.UserName, model.Password))
-            {
-                this.NotifyUser(NotifyType.Error, Notifications.LoginError);
+            var result = this.signInManager.SignIn(model.UserName, model.Password, true);
 
-                return this.View(model);
+            switch (result)
+            {
+                case SignInStatus.Success:
+                    if (Url.IsLocalUrl(returnUrl))
+                    {
+                        return this.Redirect(returnUrl);
+                    }
+
+                    return this.RedirectToAction("Index", "Home");
+                    break;
+
+                default:
+                    this.NotifyUser(NotifyType.Error, Notifications.LoginError);
+
+                    return this.View(model);
             }
 
-            // TODO: owin login
-
-            if (Url.IsLocalUrl(returnUrl))
-            {
-                return this.Redirect(returnUrl);
-            }
-
-            return this.RedirectToAction("Index", "Home");
         }
 
         /// <summary>

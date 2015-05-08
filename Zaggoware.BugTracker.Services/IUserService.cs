@@ -8,7 +8,9 @@ using Microsoft.AspNet.Identity;
 
 namespace Zaggoware.BugTracker.Services
 {
-	using Zaggoware.BugTracker.Common;
+    using Microsoft.AspNet.Identity.Owin;
+
+    using Zaggoware.BugTracker.Common;
 	using Zaggoware.BugTracker.Common.Paging;
 
     public interface IUserService : IDisposable
@@ -27,8 +29,6 @@ namespace Zaggoware.BugTracker.Services
 		User GetUserByUserName(string userName);
 
 		User GetUserByEmailAddress(string emailAddress);
-
-		bool ValidatePassword(string userName, string password);
 
         ClaimsIdentity GenerateUserIdentity(string userId);
 

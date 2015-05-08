@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 namespace Zaggoware.BugTracker.Services
 {
     using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.Owin;
 
     using Zaggoware.BugTracker.Common;
     using Zaggoware.BugTracker.Common.Paging;
@@ -76,21 +77,6 @@ namespace Zaggoware.BugTracker.Services
 		    return
 		        this.context.Users.SingleOrDefault(
 		            u => u.Email.Equals(emailAddress, StringComparison.InvariantCultureIgnoreCase)).Map();
-		}
-
-		public bool ValidatePassword(string userName, string password)
-		{
-			var user =
-				this.context.Users.SingleOrDefault(u => u.UserName.Equals(userName, StringComparison.InvariantCultureIgnoreCase));
-
-		    if (this.SupportsUserPassword)
-		    {
-		        var store = this.Store as IUserPasswordStore<Data.Entities.User, string>;
-
-		        return this.VerifyPasswordAsync(store, user, password).Result;
-		    }
-
-			return false;
 		}
 
         public ClaimsIdentity GenerateUserIdentity(string userId)

@@ -4,6 +4,10 @@ using Microsoft.Practices.Unity.Configuration;
 
 namespace Zaggoware.BugTracker.Web
 {
+    using System.Web;
+
+    using Microsoft.Owin;
+
     using Owin;
 
     using Zaggoware.BugTracker.Services;
@@ -41,6 +45,8 @@ namespace Zaggoware.BugTracker.Web
         {
             // NOTE: To load from web.config uncomment the line below. Make sure to add a Microsoft.Practices.Unity.Configuration to the using statements.
             // container.LoadConfiguration();
+
+            container.RegisterInstance<IOwinContext>(new OwinContext());
 
             Services.UnityConfig.RegisterTypes(app, container);
         }

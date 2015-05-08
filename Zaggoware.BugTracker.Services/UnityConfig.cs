@@ -7,10 +7,13 @@ using Microsoft.Practices.Unity;
 
 namespace Zaggoware.BugTracker.Services
 {
+    using System.Web;
+
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
     using Microsoft.AspNet.Identity.Owin;
     using Microsoft.Owin;
+    using Microsoft.Owin.Security;
     using Microsoft.Owin.Security.Cookies;
     using Microsoft.Owin.Security.DataProtection;
 
@@ -35,9 +38,13 @@ namespace Zaggoware.BugTracker.Services
 
             container.RegisterType<IDbContext, DbContext>(new HierarchicalLifetimeManager());
             container.RegisterType<System.Data.Entity.DbContext, DbContext>(new HierarchicalLifetimeManager());
-            container.RegisterType<IUserStore<User>, UserStore<User>>();
-            container.RegisterInstance(typeof(IDataProtectionProvider), app.GetDataProtectionProvider());
-            container.RegisterInstance(typeof(IUserService), CreateUserService(container));
+            container.RegisterInstance<IUserStore<User>>(
+                new UserStore<User>(container.Resolve<IDbContext>() as DbContext), new HierarchicalLifetimeManager());
+            container.RegisterInstance(app.GetDataProtectionProvider());
+            container.RegisterInstance(container.Resolve<IOwinContext>().Authentication);
+            container.RegisterInstance<IUserService>(CreateUserService(container));
+            container.RegisterType<InternalSignInManager>();
+            container.RegisterType<ApplicationSignInManager>();
         }
 
 
