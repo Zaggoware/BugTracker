@@ -120,6 +120,9 @@
   <data name="CurrentPassword" xml:space="preserve">
     <value>Current password</value>
   </data>
+  <data name="DesktopApp" xml:space="preserve">
+    <value>Desktop app</value>
+  </data>
   <data name="EmailAddress" xml:space="preserve">
     <value>Email address</value>
   </data>
@@ -138,10 +141,16 @@
   <data name="Password" xml:space="preserve">
     <value>Password</value>
   </data>
+  <data name="PhoneApp" xml:space="preserve">
+    <value>Phone app</value>
+  </data>
   <data name="RememberUserName" xml:space="preserve">
     <value>Remember my user name</value>
   </data>
   <data name="UserName" xml:space="preserve">
     <value>User name</value>
+  </data>
+  <data name="WebApp" xml:space="preserve">
+    <value>Web app</value>
   </data>
 </root>

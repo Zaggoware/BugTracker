@@ -1,0 +1,26 @@
+﻿@model ProjectModel
+@{
+    ViewBag.Title = "Create project";
+}
+
+<h2>Create project</h2>
+
+<div id="create-project">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        
+        <div class="form-group">
+            @Html.LabelFor(m => m.Name)
+            @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.AppType)
+            @Html.DropDownListFor(m => m.AppType, Model.AppTypes, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            <input type="submit" class="btn btn-success" value="Create "/>
+            @Html.ActionLink("Cancel", "Index", "Organizations", null, new { @class = "btn btn-danger" })
+        </div>
+    }
+</div>

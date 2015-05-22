@@ -89,10 +89,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataMappers\OrganizationMapper.cs" />
+    <Compile Include="DataMappers\ProjectMapper.cs" />
     <Compile Include="InternalSignInManager.cs" />
     <Compile Include="ApplicationSignInManager.cs" />
-    <Compile Include="DataMapper.cs" />
+    <Compile Include="DataMappers\UserMapper.cs" />
+    <Compile Include="ProjectService.cs" />
+    <Compile Include="OrganizationService.cs" />
     <Compile Include="IOrganizationService.cs" />
+    <Compile Include="IProjectService.cs" />
     <Compile Include="IUserService.cs" />
     <Compile Include="UnityConfig.cs" />
     <Compile Include="UserService.cs" />

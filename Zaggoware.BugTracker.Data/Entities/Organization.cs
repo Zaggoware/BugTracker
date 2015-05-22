@@ -13,7 +13,11 @@ namespace Zaggoware.BugTracker.Data.Entities
 
 		public string Name { get; set; }
 
-		public virtual ICollection<UserGroup> UserGroups { get; set; }
+	    public string Url { get; set; }
+
+	    public virtual ICollection<UserGroup> UserGroups { get; set; }
+
+        public virtual ICollection<Project> Projects { get; set; }
 
 		public DateTime CreationDate { get; set; }
 

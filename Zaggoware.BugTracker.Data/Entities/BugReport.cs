@@ -14,9 +14,15 @@ namespace Zaggoware.BugTracker.Data.Entities
 
         public virtual UserGroup GroupAssignee { get; set; }
 
+        public int GroupAssigneeId { get; set; }
+
 	    public virtual User UserAssignee { get; set; }
 
+        public int UserAssigneeId { get; set; }
+
 		public virtual User Reporter { get; set; }
+
+        public int ReporterId { get; set; }
 
 		public DateTime CreationDate { get; set; }
 

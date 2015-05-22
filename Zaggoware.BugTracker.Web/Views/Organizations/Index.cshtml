@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Organization>
+@{
+    ViewBag.Title = Titles.Organizations;
+}
+
+<h2>@Titles.Organizations</h2>
+
+@Html.ActionLink("Create organization", "Create", null, new { @class = "btn btn-primary" })
+
+@foreach (var organization in Model)
+{
+    <div class="organization">
+        <h3>@organization.Name</h3>
+        
+        @Html.ActionLink("Create project", "Create", "Projects", new { organizationId = organization.Id }, new { @class = "btn btn-default" })
+
+        <table class="table-bordered">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Bugs</th>
+                    <th>Creation date</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var project in organization.Projects)
+                {
+                    <tr>
+                        <td>@project.Id</td>
+                        <td>@Html.ActionLink(project.Name, "Details", "Projects", new { organizationId = organization.Id, url = project.Url }, null)</td>
+                        <td>@project.BugReports.Count()</td>
+                        <td>@project.CreationDate.ToShortDateString()</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

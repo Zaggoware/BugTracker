@@ -9,14 +9,14 @@ namespace Zaggoware.BugTracker.Services
 {
     public interface IOrganizationService
     {
-        Organization CreateOrganization(string name);
-
-        Organization CreateOrganization(string name, bool createDefaultUserGroups);
+        Organization CreateOrganization(string name, bool copyUserGroupTemplates);
 
         Organization GetOrganizationById(string id);
 
         Organization GetOrganizationByName(string name);
 
+        Organization GetOrganizationByUrl(string url);
 
+        IEnumerable<Organization> GetOrganizations();
     }
 }

@@ -10,7 +10,7 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                @if (Request.IsAuthenticated)
+                @if (Request.IsAuthenticated || ViewBag.CurrentUser != null)
                 {
                     <li>@Html.ActionLink(Titles.Dashboard, "Index", "Home")</li>
                     <li>@Html.ActionLink(Titles.Projects, "Index", "Organizations")</li>

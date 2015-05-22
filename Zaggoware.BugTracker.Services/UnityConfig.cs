@@ -39,12 +39,15 @@ namespace Zaggoware.BugTracker.Services
             container.RegisterType<IDbContext, DbContext>(new HierarchicalLifetimeManager());
             container.RegisterType<System.Data.Entity.DbContext, DbContext>(new HierarchicalLifetimeManager());
             container.RegisterInstance<IUserStore<User>>(
-                new UserStore<User>(container.Resolve<IDbContext>() as DbContext), new HierarchicalLifetimeManager());
+                new UserStore<User>(container.Resolve<IDbContext>() as DbContext), new ContainerControlledLifetimeManager());
             container.RegisterInstance(app.GetDataProtectionProvider());
             container.RegisterInstance(container.Resolve<IOwinContext>().Authentication);
-            container.RegisterInstance<IUserService>(CreateUserService(container));
-            container.RegisterType<InternalSignInManager>();
+            container.RegisterInstance<IUserService>(CreateUserService(container), new ContainerControlledLifetimeManager());
+            container.RegisterType<InternalSignInManager>(new ContainerControlledLifetimeManager());
             container.RegisterType<ApplicationSignInManager>();
+
+            container.RegisterType<IOrganizationService, OrganizationService>();
+            container.RegisterType<IProjectService, ProjectService>();
         }
 
 

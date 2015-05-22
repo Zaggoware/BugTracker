@@ -5,3 +5,4 @@ packages/
 
 #Allow NuGet.exe
 !NuGet.exe
+*.user

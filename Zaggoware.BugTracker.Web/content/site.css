@@ -15,3 +15,15 @@ select,
 textarea {
     max-width: 280px;
 }
+
+
+.organization {
+    border: 1px solid #ccc;
+    background: #eee;
+    margin: 15px 0;
+    padding: 15px;
+    border-radius: 5px;
+}
+.organization h3 {
+    margin: 0 0 15px 0;
+}

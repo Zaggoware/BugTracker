@@ -12,7 +12,7 @@ namespace Zaggoware.BugTracker.Web.Controllers
 {
 	using Zaggoware.BugTracker.Services;
 
-	[Authorize]
+	//[Authorize]
     public abstract class BaseController : Controller
     {
         protected User CurrentUser { get; private set; }
@@ -34,6 +34,11 @@ namespace Zaggoware.BugTracker.Web.Controllers
 
                 this.CurrentUser = this.UserService.GetUserById(userId);
             }
+            else
+            {
+                //Fake login
+                this.CurrentUser = this.CurrentUser = this.UserService.GetUserByUserName("Admin");
+            }
 
             this.ViewBag.CurrentUser = this.CurrentUser;
         }
@@ -49,6 +54,20 @@ namespace Zaggoware.BugTracker.Web.Controllers
             }
 
             notifications.Add(new Notification(type, message));
+        }
+
+        protected JsonResult JsonSuccess(object data, bool allowGet = false)
+        {
+            var behavior = allowGet ? JsonRequestBehavior.AllowGet : JsonRequestBehavior.DenyGet;
+
+            return this.Json(new { success = true, data = data }, behavior);
+        }
+
+        protected JsonResult JsonError(string errorMessage, bool allowGet = false)
+        {
+            var behavior = allowGet ? JsonRequestBehavior.AllowGet : JsonRequestBehavior.DenyGet;
+
+            return this.Json(new { success = false, errorMessage = errorMessage }, behavior);
         }
     }
 }

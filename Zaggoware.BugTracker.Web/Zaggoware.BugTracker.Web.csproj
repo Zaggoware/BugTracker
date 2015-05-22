@@ -189,11 +189,14 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\HtmlExtensions.cs" />
     <Compile Include="Helpers\ModelStateHelper.cs" />
     <Compile Include="Models\AccountModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\Notification.cs" />
     <Compile Include="Models\NotifyType.cs" />
+    <Compile Include="Models\OrganizationModel.cs" />
+    <Compile Include="Models\ProjectModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -237,12 +240,15 @@
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Account\Edit.cshtml" />
     <Content Include="Views\Shared\_Navigation.cshtml" />
+    <Content Include="Views\Projects\Index.cshtml" />
+    <Content Include="Views\Projects\Details.cshtml" />
+    <Content Include="Views\Projects\Create.cshtml" />
+    <Content Include="Views\Organizations\Index.cshtml" />
+    <Content Include="Views\Organizations\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Bugs\" />
-    <Folder Include="Views\Organizations\" />
-    <Folder Include="Views\Projects\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="content\fonts\glyphicons-halflings-regular.woff" />
@@ -279,16 +285,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
-          <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>64064</DevelopmentServerPort>
-          <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:64064/</IISUrl>
-          <NTLMAuthentication>False</NTLMAuthentication>
-          <UseCustomServer>False</UseCustomServer>
-          <CustomServerUrl>
-          </CustomServerUrl>
-          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+          <SaveServerSettingsInUserFile>True</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
     </VisualStudio>

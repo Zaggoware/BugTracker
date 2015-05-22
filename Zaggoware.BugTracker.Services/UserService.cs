@@ -13,6 +13,7 @@ namespace Zaggoware.BugTracker.Services
     using Zaggoware.BugTracker.Common;
     using Zaggoware.BugTracker.Common.Paging;
 	using Zaggoware.BugTracker.Data;
+    using Zaggoware.BugTracker.Services.DataMappers;
 
     public class UserService : UserManager<Data.Entities.User>, IUserService
 	{

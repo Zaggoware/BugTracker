@@ -15,6 +15,7 @@ namespace Zaggoware.BugTracker.Data.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
+            AutomaticMigrationDataLossAllowed = true;
         }
 
         protected override void Seed(Data.DbContext context)

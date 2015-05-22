@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Zaggoware.BugTracker.Services
+namespace Zaggoware.BugTracker.Services.DataMappers
 {
 	using Zaggoware.BugTracker.Common;
 	using Zaggoware.BugTracker.Common.Paging;
 
-    internal static class DataMapper
+    internal static class UserMapper
 	{
 		public static User Map(this Data.Entities.User user)
 		{
@@ -34,15 +34,5 @@ namespace Zaggoware.BugTracker.Services
                        ? new PagedList<User>(source.Select(Map), source.Page, source.ItemsPerPage)
                        : new PagedList<User>(Enumerable.Empty<User>(), 1, PagedList.DefaultItemsPerPage);
         }
-
-        public static Organization Map(this Data.Entities.Organization organization)
-		{
-            if (organization == null)
-            {
-                return null;
-            }
-
-			return new Organization { Id = organization.Id, Name = organization.Name };
-		}
 	}
 }
