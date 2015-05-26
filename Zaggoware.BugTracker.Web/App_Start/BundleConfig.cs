@@ -25,7 +25,7 @@ namespace Zaggoware.BugTracker.Web
 
 			bundles.Add(new StyleBundle("~/content/css").Include(
 					  "~/content/bootstrap.min.css",
-					  "~/content/site.css"));
+					  "~/content/style.css"));
 
 			// Set EnableOptimizations to false for debugging. For more information,
 			// visit http://go.microsoft.com/fwlink/?LinkId=301862

@@ -6,7 +6,8 @@ using System.Web.Mvc;
 
 namespace Zaggoware.BugTracker.Web.Controllers
 {
-	using Zaggoware.BugTracker.Services;
+    using Zaggoware.BugTracker.Common.Tagging;
+    using Zaggoware.BugTracker.Services;
 	using Zaggoware.BugTracker.Web.Models;
 
     public class OrganizationsController : BaseController
@@ -30,7 +31,17 @@ namespace Zaggoware.BugTracker.Web.Controllers
         [HttpGet]
 	    public ActionResult Create()
         {
-            return this.View(new OrganizationModel { Managers = new List<int> { 1, 3 } });
+            return
+                this.View(
+                    new OrganizationModel
+                        {
+                            Managers =
+                                new TagList
+                                    {
+                                        new TagListItem { HiddenValue = 1, Label = "Patrick" },
+                                        new TagListItem { HiddenValue = 3, Label = "Joeri" }
+                                    }
+                        });
         }
 
         [HttpPost]

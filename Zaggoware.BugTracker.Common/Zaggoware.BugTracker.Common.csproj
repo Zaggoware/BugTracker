@@ -50,6 +50,8 @@
     <Compile Include="Paging\PagingHelper.cs" />
     <Compile Include="Project.cs" />
     <Compile Include="AppType.cs" />
+    <Compile Include="Tagging\TagList.cs" />
+    <Compile Include="Tagging\TagListItem.cs" />
     <Compile Include="User.cs" />
     <Compile Include="Privileges.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Zaggoware.BugTracker.Web.Helpers
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -20,6 +21,18 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    
+    @if (HtmlExtensions.IncludeTagger)
+    {
+        <script type="text/javascript" src="@Url.Content("~/scripts/Tagger.js")"></script>
+        <script type="text/javascript">
+            $(function () {
+                console.log(Zaggoware.Tagging.Tagger);
+                Zaggoware.Tagging.Tagger.initialize();
+            });
+        </script>
+    }
+
     @RenderSection("scripts", required: false)
 </body>
 </html>

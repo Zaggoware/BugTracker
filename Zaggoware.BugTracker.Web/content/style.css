@@ -1,0 +1,58 @@
+﻿body {
+  padding-top: 50px;
+  padding-bottom: 20px;
+}
+/* Set padding to keep content from hitting the edges */
+.body-content {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+  max-width: 280px;
+}
+.organization {
+  border: 1px solid #ccc;
+  background: #eee;
+  margin: 15px 0;
+  padding: 15px;
+  border-radius: 5px;
+}
+.organization h3 {
+  margin: 0 0 15px 0;
+}
+.tag-list {
+  list-style: none;
+  margin: 10px 0;
+  padding: 0;
+}
+.tag-list-item {
+  display: inline-block;
+  padding-right: 5px;
+  cursor: default;
+}
+.tag-list-item-label {
+  position: relative;
+  background-color: #99b4d1;
+  padding: 3px 20px 3px 10px;
+  border-radius: 3px;
+}
+.tag-list-item-remove {
+  width: 10px;
+  color: #880000;
+  font-size: 10px;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: none;
+}
+.tag-list-item:hover .tag-list-item-label {
+  background-color: #769ac1;
+}
+.tag-list-item:hover .tag-list-item-remove {
+  display: block;
+}
+/*# sourceMappingURL=style.css.map */

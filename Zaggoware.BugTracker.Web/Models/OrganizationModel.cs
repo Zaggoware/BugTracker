@@ -8,12 +8,14 @@ namespace Zaggoware.BugTracker.Web.Models
 {
     using System.ComponentModel.DataAnnotations;
 
+    using Zaggoware.BugTracker.Common.Tagging;
+
     public class OrganizationModel
     {
         [Required]
         public string Name { get; set; }
 
         [Required]
-        public IEnumerable<int> Managers { get; set; }
+        public TagList Managers { get; set; }
     }
 }
